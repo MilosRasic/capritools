@@ -2,6 +2,9 @@
 include("posdscan.class.php");
 include("functions.php");	
 
+ini_set("display_errors", 1);
+error_reporting(E_ALL & ~E_NOTICE);
+
 saveHit();
 
 if(isset($_POST['dscan'])) {
@@ -13,7 +16,7 @@ if(isset($_POST['dscan'])) {
 	//Save to file
 	file_put_contents("scans/".$key, $dscan);
 	
-	header('Location: /dscan/'.$key);
+	header('Location: /'.$key);
 	//print_r($objects);
 }
 ?>
@@ -47,7 +50,7 @@ if(isset($_POST['dscan'])) {
 					<fieldset>
 					  <i><legend>Paste your dscan into the box below</legend></i>
 					  <div class="form-group">
-							<textarea id="dscan" name="dscan" class="form-control" rows="8"><? if(isset($_POST['dscan'])) { echo $_POST['dscan']; } ?></textarea><br />
+							<textarea id="dscan" name="dscan" class="form-control" rows="8"><?php if(isset($_POST['dscan'])) { echo $_POST['dscan']; } ?></textarea><br />
 						
 							<button type="submit" class="btn btn-primary">Submit</button>
 					</fieldset>
