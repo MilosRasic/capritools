@@ -65,9 +65,6 @@ if($towerurl == null) {
 }
 ?>
 <body>
-	<?php include("../header.php"); ?>
-
-
 	<div class="container">
 
 			<div class="col-lg-10 col-lg-offset-1">

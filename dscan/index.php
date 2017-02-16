@@ -38,10 +38,6 @@ if(isset($_POST['dscan'])) {
 	<!-- Custom Page CSS -->
 </head>
 <body>
-	
-	<?php include("../header.php"); ?>
-
-
 	<div class="container">
 		<div class="starter-template">
 			<h1>Directional Scan Paste Tool</h1>
