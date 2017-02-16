@@ -298,7 +298,7 @@ function getDscanShips($key) {
 	
 	//Get objects for scan
 	$id = $rows[0]['id'];
-	$st = $db->prepare("SELECT type, count(*) as quantity, groupName FROM dscanObjects INNER JOIN oceanus.invTypes as ships ON ships.typeName=dscanObjects.type INNER JOIN oceanus.invGroups AS groups ON groups.groupID = ships.groupID WHERE scan=:scan AND groups.categoryID = 6 GROUP BY type ORDER BY quantity DESC");
+	$st = $db->prepare("SELECT type, count(*) as quantity, groupName FROM dscanObjects INNER JOIN seat.invTypes as ships ON ships.typeName=dscanObjects.type INNER JOIN seat.invGroups AS groups ON groups.groupID = ships.groupID WHERE scan=:scan AND groups.categoryID = 6 GROUP BY type ORDER BY quantity DESC");
 	$st->bindValue(":scan", $id, PDO::PARAM_STR);
 	$st->execute();
 	$rows = $st->fetchAll(PDO::FETCH_ASSOC);
@@ -325,7 +325,7 @@ function getDscanShipsMass($key) {
 	
 	//Get objects for scan
 	$id = $rows[0]['id'];
-	$st = $db->prepare("SELECT sum(mass) as totalMass FROM dscanObjects INNER JOIN oceanus.invTypes as ships ON ships.typeName=dscanObjects.type INNER JOIN oceanus.invGroups AS groups ON groups.groupID = ships.groupID WHERE scan=:scan AND ships.groupID NOT IN(30, 659) AND groups.categoryID = 6;");
+	$st = $db->prepare("SELECT sum(mass) as totalMass FROM dscanObjects INNER JOIN seat.invTypes as ships ON ships.typeName=dscanObjects.type INNER JOIN seat.invGroups AS groups ON groups.groupID = ships.groupID WHERE scan=:scan AND ships.groupID NOT IN(30, 659) AND groups.categoryID = 6;");
 	$st->bindValue(":scan", $id, PDO::PARAM_STR);
 	$st->execute();
 	$rows = $st->fetchAll(PDO::FETCH_ASSOC);
@@ -352,7 +352,7 @@ function getDscanShipsVolume($key) {
 	
 	//Get objects for scan
 	$id = $rows[0]['id'];
-	$st = $db->prepare("SELECT sum(volume) as totalVolume FROM dscanObjects INNER JOIN oceanus.invTypes as ships ON ships.typeName=dscanObjects.type INNER JOIN oceanus.invGroups AS groups ON groups.groupID = ships.groupID WHERE scan=:scan AND ships.groupID NOT IN(30, 659) AND groups.categoryID = 6;");
+	$st = $db->prepare("SELECT sum(volume) as totalVolume FROM dscanObjects INNER JOIN seat.invTypes as ships ON ships.typeName=dscanObjects.type INNER JOIN seat.invGroups AS groups ON groups.groupID = ships.groupID WHERE scan=:scan AND ships.groupID NOT IN(30, 659) AND groups.categoryID = 6;");
 	$st->bindValue(":scan", $id, PDO::PARAM_STR);
 	$st->execute();
 	$rows = $st->fetchAll(PDO::FETCH_ASSOC);
@@ -379,7 +379,7 @@ function getDscanShipTypesSubs($key) {
 	
 	//Get objects for scan
 	$id = $rows[0]['id'];
-	$st = $db->prepare("SELECT groups.groupName as type, count(*) as quantity, groupName FROM dscanObjects INNER JOIN oceanus.invTypes as ships ON ships.typeName=dscanObjects.type INNER JOIN oceanus.invGroups as groups ON groups.groupID = ships.groupID
+	$st = $db->prepare("SELECT groups.groupName as type, count(*) as quantity, groupName FROM dscanObjects INNER JOIN seat.invTypes as ships ON ships.typeName=dscanObjects.type INNER JOIN seat.invGroups as groups ON groups.groupID = ships.groupID
 	WHERE scan=:scan AND ships.groupID NOT IN(30, 659, 485, 547, 883, 902, 1538) AND groups.categoryID = 6 GROUP BY groups.groupName ORDER BY quantity DESC");
 	$st->bindValue(":scan", $id, PDO::PARAM_STR);
 	$st->execute();
@@ -407,7 +407,7 @@ function getDscanShipTypesCaps($key) {
 	
 	//Get objects for scan
 	$id = $rows[0]['id'];
-	$st = $db->prepare("SELECT groups.groupName as type, count(*) as quantity, groupName FROM dscanObjects INNER JOIN oceanus.invTypes as ships ON ships.typeName=dscanObjects.type INNER JOIN oceanus.invGroups as groups ON groups.groupID = ships.groupID
+	$st = $db->prepare("SELECT groups.groupName as type, count(*) as quantity, groupName FROM dscanObjects INNER JOIN seat.invTypes as ships ON ships.typeName=dscanObjects.type INNER JOIN seat.invGroups as groups ON groups.groupID = ships.groupID
 	WHERE scan=:scan AND ships.groupID IN(30, 659, 485, 547, 883, 902, 1538) AND groups.categoryID = 6 GROUP BY groups.groupName ORDER BY quantity DESC");
 	$st->bindValue(":scan", $id, PDO::PARAM_STR);
 	$st->execute();
@@ -550,7 +550,7 @@ function towerChecker($key) {
 	
 	//Get towers
 	$id = $rows[0]['id'];
-	$st = $db->prepare("SELECT count(*) as towers FROM dscanObjects INNER JOIN oceanus.invTypes on oceanus.invTypes.typeName=dscanObjects.type WHERE `scan`=:scan AND groupID = 365");
+	$st = $db->prepare("SELECT count(*) as towers FROM dscanObjects INNER JOIN seat.invTypes on seat.invTypes.typeName=dscanObjects.type WHERE `scan`=:scan AND groupID = 365");
 	$st->bindValue(":scan", $id, PDO::PARAM_STR);
 	$st->execute();
 	$rows = $st->fetchAll(PDO::FETCH_ASSOC);
